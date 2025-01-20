@@ -23,12 +23,16 @@ form.addEventListener("submit", async (ev) => {
 
 	const children: Node[] = [];
 	armature?.childNodes.forEach((v) => {
-		if (v.nodeName == "NODE") children.push(v.cloneNode(true));
+		if (v.nodeName == "node") children.push(v.cloneNode(true));
 	});
 
 	armature?.remove();
 
 	scene?.append(...children);
+	const armatureNodes = doc.querySelectorAll("node[id^='Armature_']");
+	armatureNodes.forEach((v) => {
+		v.id = v.id.substring(9);
+	});
 
 	const serializer = new XMLSerializer();
 	const content = serializer.serializeToString(doc);
