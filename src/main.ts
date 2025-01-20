@@ -15,8 +15,8 @@ form.addEventListener("submit", async (ev) => {
 	const parser = new DOMParser();
 	const doc = parser.parseFromString(text, "text/xml");
 
-	const diffuse = doc.querySelector("diffuse");
-	diffuse!.textContent = "";
+	const diffuse = doc.querySelector("diffuse:has(texture)");
+	if (diffuse) diffuse.textContent = "";
 
 	const armature = doc.querySelector("node#Armature");
 	const scene = doc.querySelector("visual_scene#Scene");
